@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Mlijoan</title>
+  <meta name="description" content="Dashboard admin Mlijoan untuk manajemen pesanan, inventori, dan mitra supplier.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ SIDEBAR ═══ -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin Navigation">
+
+  <div class="sidebar-brand">
+    <img src="images/logo.png" alt="Mlijoan">
+    <div class="sidebar-brand-text">
+      <div class="sidebar-brand-name">Mlijoan</div>
+      <div class="sidebar-brand-role">Admin Panel v1.0</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Utama</div>
+    <button class="nav-link active" data-section="dashboard" onclick="navigateTo('dashboard')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </button>
+
+    <div class="sidebar-section-label">Transaksi</div>
+    <button class="nav-link" data-section="orders" onclick="navigateTo('orders')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Pesanan
+      <span class="nav-badge" id="badge-orders">0</span>
+    </button>
+    <button class="nav-link" data-section="transfer" onclick="navigateTo('transfer')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Verifikasi Transfer
+      <span class="nav-badge" id="badge-transfer">0</span>
+    </button>
+    <button class="nav-link" data-section="pos" onclick="navigateTo('pos')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Kasir POS
+    </button>
+    <button class="nav-link" data-section="customers" onclick="navigateTo('customers')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Pelanggan
+      <span class="nav-badge" id="badge-customers" style="display:none">0</span>
+    </button>
+
+    <div class="sidebar-section-label">Inventori</div>
+    <button class="nav-link" data-section="products" onclick="navigateTo('products')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      Produk & Stok
+    </button>
+    <button class="nav-link" data-section="suppliers" onclick="navigateTo('suppliers')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Mitra Supplier
+      <span class="nav-badge" id="badge-suppliers">0</span>
+    </button>
+
+    <div class="sidebar-section-label">Marketing</div>
+    <button class="nav-link" data-section="promos" onclick="navigateTo('promos')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      Kode Promo
+    </button>
+    <button class="nav-link" data-section="reports" onclick="navigateTo('reports')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Laporan & Analitik
+    </button>
+
+    <div class="sidebar-section-label">Sistem</div>
+    <button class="nav-link" data-section="settings" onclick="navigateTo('settings')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M4.93 4.93l1.41 1.41M21 12h-2M5 12H3M12 3V1M12 23v-2"/></svg>
+      Pengaturan
+    </button>
+    <a href="index.html" class="nav-link" style="margin-top:4px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Kembali ke Toko
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">👤</div>
+      <div class="sidebar-user-info">
+        <p>Admin Mlijoan</p>
+        <small>Super Admin</small>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════ MAIN CONTENT ═══ -->
+<div class="main-content">
+
+  <!-- Top Header -->
+  <header class="top-header">
+    <button class="header-icon-btn mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div style="flex:1">
+      <div class="header-title" id="header-title">Dashboard</div>
+      <div class="header-subtitle" id="header-subtitle">Ringkasan aktivitas & performa hari ini</div>
+    </div>
+    <div class="header-actions">
+      <div class="breadcrumb">
+        <a href="index.html" style="color:var(--neutral-400)">Toko</a>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span id="breadcrumb-current">Dashboard</span>
+      </div>
+      <button class="header-icon-btn" onclick="showToast('Tidak ada notifikasi baru','default')" aria-label="Notifikasi">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="header-notif-badge"></span>
+      </button>
+      <button class="header-icon-btn" onclick="window.print()" aria-label="Cetak">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      </button>
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer" title="Admin Mlijoan">👤</div>
+    </div>
+  </header>
+
+  <!-- ── Page Content ── -->
+  <div class="page-content">
+
+    <!-- ═══════════════════ SECTION: DASHBOARD ═══ -->
+    <section id="section-dashboard" class="admin-section active">
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon green">💰</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Omzet Bulan Ini</div>
+            <div class="kpi-value small" id="kpi-revenue">Rp 0</div>
+            <div class="kpi-trend up">↑ 12.4% vs bulan lalu</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon blue">📦</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Total Pesanan</div>
+            <div class="kpi-value" id="kpi-orders">0</div>
+            <div class="kpi-trend up">↑ 8 pesanan hari ini</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon orange">⏳</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Pesanan Pending</div>
+            <div class="kpi-value" id="kpi-pending">0</div>
+            <div class="kpi-trend down">Butuh tindakan segera</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon yellow">💳</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Transfer Belum Verif</div>
+            <div class="kpi-value" id="kpi-transfer">0</div>
+            <div class="kpi-trend down">Periksa bukti transfer</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon green">🤝</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Supplier Pending</div>
+            <div class="kpi-value" id="kpi-suppliers">0</div>
+            <div class="kpi-trend down">Menunggu verifikasi</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon blue">🛍️</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Produk Aktif</div>
+            <div class="kpi-value" id="kpi-products">0</div>
+            <div class="kpi-trend up">3 stok kritis</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon green">🚚</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Dalam Pengiriman</div>
+            <div class="kpi-value">1</div>
+            <div class="kpi-trend up">↑ On-time delivery 94%</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon orange">⭐</div>
+          <div class="kpi-info">
+            <div class="kpi-label">Rating Toko</div>
+            <div class="kpi-value">4.8</div>
+            <div class="kpi-trend up">↑ Dari 1.240 ulasan</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">📈 Grafik Penjualan 7 Hari</div>
+              <div class="chart-subtitle">Omzet (batang hijau) & Jumlah Pesanan (garis oranye)</div>
+            </div>
+            <div style="display:flex;gap:14px;font-size:11px;color:var(--neutral-500)">
+              <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:var(--primary);border-radius:2px;display:inline-block"></span>Omzet</span>
+              <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:2px;background:var(--secondary);display:inline-block"></span>Pesanan</span>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="revenue-chart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">🥧 Distribusi Kategori</div>
+              <div class="chart-subtitle">Penjualan per kategori produk</div>
+            </div>
+          </div>
+          <div class="chart-body" style="display:flex;flex-direction:column;align-items:center;gap:16px">
+            <canvas id="donut-chart" style="max-width:180px;max-height:180px"></canvas>
+            <div style="width:100%">
+              <div id="donut-legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-header-left">
+              <div class="table-title">🔔 Aktivitas Terbaru</div>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="renderRecentActivity()">Refresh</button>
+          </div>
+          <div id="recent-activity" class="activity-list"></div>
+        </div>
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-header-left">
+              <div class="table-title">⚠️ Stok Produk Kritis</div>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="navigateTo('products');renderProducts('low')">Lihat Semua</button>
+          </div>
+          <div id="low-stock-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: ORDERS ═══ -->
+    <section id="section-orders" class="admin-section">
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-header-left">
+            <div class="table-title">📋 Daftar Pesanan</div>
+            <div class="table-count" id="orders-count">—</div>
+          </div>
+          <div class="table-header-right">
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-order-filter="all" onclick="renderOrders('all')">Semua</button>
+              <button class="filter-tab" data-order-filter="pending" onclick="renderOrders('pending')">⏳ Pending</button>
+              <button class="filter-tab" data-order-filter="processing" onclick="renderOrders('processing')">⚙️ Proses</button>
+              <button class="filter-tab" data-order-filter="delivery" onclick="renderOrders('delivery')">🚚 Kirim</button>
+              <button class="filter-tab" data-order-filter="completed" onclick="renderOrders('completed')">✅ Selesai</button>
+              <button class="filter-tab" data-order-filter="cancelled" onclick="renderOrders('cancelled')">❌ Batal</button>
+            </div>
+            <div class="search-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" class="table-search" id="order-search" placeholder="Cari ID / nama...">
+            </div>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID Pesanan</th>
+                <th>Pelanggan</th>
+                <th>Produk</th>
+                <th class="sortable">Total ↕</th>
+                <th>Status</th>
+                <th>Jadwal · Bayar</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: TRANSFER VERIFICATION ═══ -->
+    <section id="section-transfer" class="admin-section">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+        <div class="kpi-card">
+          <div class="kpi-icon orange">⏳</div>
+          <div class="kpi-info"><div class="kpi-label">Menunggu Konfirmasi</div><div class="kpi-value" id="transfer-stat-pending">—</div></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon green">✅</div>
+          <div class="kpi-info"><div class="kpi-label">Sudah Dikonfirmasi (Hari Ini)</div><div class="kpi-value">3</div></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon blue">💰</div>
+          <div class="kpi-info"><div class="kpi-label">Total Nilai Pending</div><div class="kpi-value small" id="transfer-stat-value">—</div></div>
+        </div>
+      </div>
+      <div id="transfer-list"></div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: PRODUCTS ═══ -->
+    <section id="section-products" class="admin-section">
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-header-left">
+            <div class="table-title">📦 Inventori Produk</div>
+            <div class="table-count" id="products-count">—</div>
+          </div>
+          <div class="table-header-right">
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-product-filter="all" onclick="renderProducts('all')">Semua</button>
+              <button class="filter-tab" data-product-filter="active" onclick="renderProducts('active')">✅ Aktif</button>
+              <button class="filter-tab" data-product-filter="low" onclick="renderProducts('low')">⚠️ Stok Rendah</button>
+              <button class="filter-tab" data-product-filter="inactive" onclick="renderProducts('inactive')">🔕 Nonaktif</button>
+            </div>
+            <div class="search-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" class="table-search" id="product-search" placeholder="Cari produk...">
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openAddProduct()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Produk
+            </button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th>Harga</th>
+                <th style="min-width:140px">Stok</th>
+                <th>Level</th>
+                <th>Rating</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="products-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: SUPPLIERS ═══ -->
+    <section id="section-suppliers" class="admin-section">
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-header-left">
+            <div class="table-title">🤝 Mitra Supplier</div>
+            <div class="table-count" id="suppliers-count">—</div>
+          </div>
+          <div class="table-header-right">
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-supplier-filter="all" onclick="renderSuppliers('all')">Semua</button>
+              <button class="filter-tab" data-supplier-filter="pending" onclick="renderSuppliers('pending')">⏳ Pending</button>
+              <button class="filter-tab" data-supplier-filter="approved" onclick="renderSuppliers('approved')">✅ Disetujui</button>
+              <button class="filter-tab" data-supplier-filter="rejected" onclick="renderSuppliers('rejected')">❌ Ditolak</button>
+            </div>
+            <div class="search-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" class="table-search" id="supplier-search" placeholder="Cari mitra...">
+            </div>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nama Mitra</th>
+                <th>Kategori</th>
+                <th>WhatsApp</th>
+                <th>Alamat</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="suppliers-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: PROMOS ═══ -->
+    <section id="section-promos" class="admin-section">
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-header-left">
+            <div class="table-title">🏷️ Kode Promo</div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openAddPromo()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Tambah Promo
+          </button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Tipe Diskon</th>
+                <th>Min. Order</th>
+                <th style="min-width:160px">Pemakaian</th>
+                <th>Berlaku s.d</th>
+                <th>Aktif</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="promos-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: POS ═══ -->
+    <section id="section-pos" class="admin-section" style="padding:0;background:#f5f6fa">
+      <div style="display:grid;grid-template-columns:1fr 400px;height:calc(100vh - 56px);overflow:hidden">
+
+        <!-- ══ LEFT: Product Catalog ══ -->
+        <div style="display:flex;flex-direction:column;height:100%;overflow:hidden;padding:20px 20px 0 20px">
+
+          <!-- Top bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-shrink:0">
+            <div>
+              <h2 style="font-size:20px;font-weight:800;color:#111827;margin:0">Produk</h2>
+              <div style="font-size:12px;color:#9ca3af;margin-top:2px">Pilih produk untuk ditambahkan ke pesanan</div>
+            </div>
+            <!-- Search -->
+            <div style="position:relative;width:240px">
+              <svg style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#9ca3af" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input id="pos-search" type="text" placeholder="Search..." oninput="posFilterProducts(this.value)"
+                style="width:100%;padding:9px 12px 9px 34px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;background:white;box-sizing:border-box"
+                onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+            </div>
+          </div>
+
+          <!-- Category tabs -->
+          <div id="pos-cat-tabs" style="display:flex;gap:8px;flex-shrink:0;overflow-x:auto;padding-bottom:12px;scrollbar-width:none">
+          </div>
+
+          <!-- Product grid -->
+          <div id="pos-products"
+            style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;overflow-y:auto;padding-bottom:20px;flex:1;align-content:start">
+          </div>
+        </div>
+
+        <!-- ══ RIGHT: Order Detail ══ -->
+        <div style="display:flex;flex-direction:column;background:white;border-left:1px solid #f0f1f3;height:100%;overflow:hidden">
+
+          <!-- Panel header -->
+          <div style="padding:18px 20px 14px;border-bottom:1px solid #f0f1f3;flex-shrink:0">
+            <div style="font-size:16px;font-weight:800;color:#111827">Order Detail</div>
+          </div>
+
+          <!-- Scrollable body -->
+          <div style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+
+            <!-- Customer Information -->
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                <div style="font-size:13px;font-weight:700;color:#374151">Customer Information</div>
+                <button onclick="posShowAddCustomer()" style="font-size:11px;font-weight:700;color:var(--primary);background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:7px;padding:4px 10px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Customer Baru
+                </button>
+              </div>
+              <!-- Customer picker -->
+              <div style="position:relative;margin-bottom:10px">
+                <label style="font-size:11px;color:#9ca3af;font-weight:600;display:block;margin-bottom:4px">Pilih / Cari Customer</label>
+                <div style="position:relative">
+                  <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#9ca3af;pointer-events:none" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                  <input id="pos-customer-search" type="text" placeholder="Ketik nama customer..."
+                    oninput="posSearchCustomer(this.value)"
+                    onfocus="posShowCustomerDropdown()" autocomplete="off"
+                    style="width:100%;padding:9px 12px 9px 32px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box"
+                    onfocusin="this.style.borderColor='var(--primary)'" onblur="setTimeout(posHideCustomerDropdown,200)">
+                  <!-- Selected customer chip -->
+                  <div id="pos-customer-chip" style="display:none;position:absolute;inset:0;background:white;border:1.5px solid var(--primary);border-radius:9px;padding:0 10px;display:none;align-items:center;gap:8px">
+                    <div style="width:24px;height:24px;border-radius:50%;background:var(--primary);color:white;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center" id="pos-customer-avatar">?</div>
+                    <span id="pos-customer-name-display" style="font-size:13px;font-weight:700;color:#111827;flex:1"></span>
+                    <button onclick="posDeselectCustomer()" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:16px;line-height:1;padding:0" title="Ganti customer">&times;</button>
+                  </div>
+                </div>
+                <!-- Dropdown list -->
+                <div id="pos-customer-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid #e5e7eb;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;max-height:180px;overflow-y:auto;margin-top:4px">
+                </div>
+              </div>
+              <!-- hidden field for customer id -->
+              <input id="pos-customer" type="hidden" value="">
+              <!-- Order type (single full-width) -->
+              <div>
+                <label style="font-size:11px;color:#9ca3af;font-weight:600;display:block;margin-bottom:4px">Order Type</label>
+                <select id="pos-order-type"
+                  style="width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:13px;font-family:inherit;outline:none;background:white;cursor:pointer;box-sizing:border-box"
+                  onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+                  <option value="offline">🏪 Offline (Datang Langsung)</option>
+                  <option value="online">🌐 Online (Pesan Antar)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Items selected -->
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                <div id="pos-items-count" style="font-size:13px;font-weight:600;color:#374151">0 item dipilih</div>
+                <button onclick="posClearCart()" style="font-size:12px;color:#ef4444;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:600">Clear all</button>
+              </div>
+
+              <!-- Cart items list -->
+              <div id="pos-cart-items" style="display:flex;flex-direction:column;gap:10px">
+                <div id="pos-cart-empty" style="text-align:center;padding:32px 0;color:#9ca3af">
+                  <div style="font-size:32px;margin-bottom:8px">🧺</div>
+                  <div style="font-size:13px;font-weight:600">Belum ada produk</div>
+                  <div style="font-size:11px;margin-top:4px">Pilih produk dari katalog</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Promo / Discount -->
+            <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px">
+              <div style="width:28px;height:28px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:12px;font-weight:700;color:#166534">
+                  Diskon <span id="pos-discount-label">—</span>
+                </div>
+                <div style="font-size:11px;color:#4ade80">Masukkan kode promo atau diskon manual</div>
+              </div>
+              <button onclick="posOpenPromo()" style="font-size:11px;font-weight:700;color:var(--primary);background:none;border:none;cursor:pointer;font-family:inherit;white-space:nowrap">Ubah Promo</button>
+            </div>
+
+            <!-- Promo input (hidden by default) -->
+            <div id="pos-promo-row" style="display:none;gap:8px">
+              <input id="pos-discount" type="number" min="0" max="100" placeholder="%" oninput="posCalcTotal()"
+                style="width:70px;padding:8px 10px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:13px;font-family:inherit;outline:none;text-align:center;flex-shrink:0"
+                onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+              <span style="font-size:12px;color:#9ca3af;align-self:center">% diskon manual</span>
+            </div>
+
+          </div><!-- end scrollable body -->
+
+          <!-- ── Totals + Payment ── -->
+          <div style="flex-shrink:0;border-top:1px solid #f0f1f3;padding:14px 20px">
+
+            <!-- Payment method -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px">
+              <button onclick="posSetPayment('cash')" id="pos-pay-cash"
+                style="padding:8px 4px;border-radius:9px;border:1.5px solid var(--primary);background:var(--primary);color:white;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s">
+                💵 Tunai
+              </button>
+              <button onclick="posSetPayment('qris')" id="pos-pay-qris"
+                style="padding:8px 4px;border-radius:9px;border:1.5px solid #e5e7eb;background:white;color:#374151;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s">
+                📱 QRIS
+              </button>
+              <button onclick="posSetPayment('edc')" id="pos-pay-edc"
+                style="padding:8px 4px;border-radius:9px;border:1.5px solid #e5e7eb;background:white;color:#374151;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s">
+                💳 EDC
+              </button>
+            </div>
+
+            <!-- Cash input -->
+            <div id="pos-cash-section" style="margin-bottom:10px">
+              <input id="pos-cash-input" type="number" placeholder="Nominal uang diterima (Rp)" oninput="posCalcChange()"
+                style="width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box"
+                onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+              <div style="margin-top:5px;display:flex;justify-content:space-between;font-size:12px">
+                <span style="color:#6b7280">Kembalian</span>
+                <span id="pos-change" style="font-weight:700;color:var(--primary)">—</span>
+              </div>
+            </div>
+
+            <!-- Bill breakdown -->
+            <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:#6b7280">
+                <span>Subtotal</span><span id="pos-subtotal">Rp 0</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:#6b7280">
+                <span>PPN (11%)</span><span id="pos-tax">Rp 0</span>
+              </div>
+              <div id="pos-discount-row" style="display:none;justify-content:space-between;font-size:13px;color:#ef4444">
+                <span id="pos-discount-label2">Diskon</span><span id="pos-discount-amount">— Rp 0</span>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-top:10px;border-top:1.5px solid #f0f1f3">
+              <span style="font-size:16px;font-weight:800;color:#111827">Total</span>
+              <span id="pos-total" style="font-size:20px;font-weight:900;color:var(--primary)">Rp 0</span>
+            </div>
+
+            <!-- Process button -->
+            <button onclick="posProcessSale()" id="pos-process-btn"
+              style="width:100%;padding:14px;background:#1a3c2a;color:white;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s"
+              onmouseover="this.style.background='var(--primary)'" onmouseout="this.style.background='#1a3c2a'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.12 0 4.07.74 5.61 1.96"/></svg>
+              Proses Transaksi
+            </button>
+          </div>
+
+        </div><!-- end right panel -->
+      </div>
+    </section>
+
+
+
+
+    <!-- ═══════════════════ SECTION: REPORTS ═══ -->
+    <section id="section-reports" class="admin-section">
+      <!-- Revenue Trend -->
+      <div class="table-card" style="margin-bottom:20px">
+        <div class="table-header">
+          <div class="table-header-left">
+            <div class="table-title">📈 Tren Penjualan — 14 Hari Terakhir</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="filter-tab active" onclick="this.parentElement.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active')">14 Hari</button>
+            <button class="filter-tab" onclick="this.parentElement.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active')">30 Hari</button>
+            <button class="filter-tab" onclick="this.parentElement.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));this.classList.add('active')">90 Hari</button>
+          </div>
+        </div>
+        <div class="chart-body"><canvas id="report-revenue-chart"></canvas></div>
+      </div>
+
+      <!-- Stats row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+        <div class="kpi-card"><div class="kpi-icon green">💰</div><div class="kpi-info"><div class="kpi-label">Total Omzet</div><div class="kpi-value small">Rp 28,6 Jt</div><div class="kpi-trend up">↑ 14 hari terakhir</div></div></div>
+        <div class="kpi-card"><div class="kpi-icon blue">📦</div><div class="kpi-info"><div class="kpi-label">Total Pesanan</div><div class="kpi-value">247</div><div class="kpi-trend up">↑ Rate 76% selesai</div></div></div>
+        <div class="kpi-card"><div class="kpi-icon orange">🧾</div><div class="kpi-info"><div class="kpi-label">Rata-rata Pesanan</div><div class="kpi-value small">Rp 115K</div><div class="kpi-trend up">↑ per transaksi</div></div></div>
+      </div>
+
+      <!-- Category & Top Products -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="table-card">
+          <div class="table-header"><div class="table-title">🥧 Penjualan per Kategori</div></div>
+          <div style="padding:20px" id="category-report"></div>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><div class="table-title">🏆 Produk Terlaris</div></div>
+          <div style="overflow:hidden">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Produk</th><th>Terjual</th><th>Revenue</th></tr></thead>
+              <tbody>
+                <tr><td style="font-weight:700;color:var(--accent)">🥇</td><td>Telur Ayam Kampung</td><td class="num">312</td><td class="num-green">Rp 9,9 Jt</td></tr>
+                <tr><td style="font-weight:700;color:var(--neutral-400)">🥈</td><td>Beras Premium</td><td class="num">245</td><td class="num-green">Rp 3,7 Jt</td></tr>
+                <tr><td style="font-weight:700;color:var(--secondary)">🥉</td><td>Gula Pasir</td><td class="num">234</td><td class="num-green">Rp 3,7 Jt</td></tr>
+                <tr><td style="font-weight:700;color:var(--neutral-500)">4</td><td>Minyak Bimoli 2L</td><td class="num">201</td><td class="num-green">Rp 7,6 Jt</td></tr>
+                <tr><td style="font-weight:700;color:var(--neutral-500)">5</td><td>Tomat Segar</td><td class="num">189</td><td class="num-green">Rp 1,5 Jt</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ SECTION: SETTINGS ═══ -->
+    <section id="section-settings" class="admin-section">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+        <!-- Store Info -->
+        <div class="table-card">
+          <div class="table-header"><div class="table-title">🏪 Informasi Toko</div></div>
+          <div style="padding:20px">
+            <div class="form-group"><label class="form-label">Nama Toko</label><input type="text" class="form-control" value="Mlijoan"></div>
+            <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-control" value="Sembako & Pangan Segar Terpercaya"></div>
+            <div class="form-group"><label class="form-label">WhatsApp CS</label><input type="tel" class="form-control" value="0812-3456-7890"></div>
+            <div class="form-group"><label class="form-label">Alamat Toko</label><textarea class="form-control form-textarea" style="min-height:60px">Jl. Pasar Baru No. 1, Bandung, Jawa Barat</textarea></div>
+            <button class="btn btn-primary" onclick="showToast('Informasi toko tersimpan!','success')">Simpan Perubahan</button>
+          </div>
+        </div>
+
+        <!-- Delivery Settings -->
+        <div class="table-card">
+          <div class="table-header"><div class="table-title">🚚 Konfigurasi Pengiriman</div></div>
+          <div style="padding:20px">
+            <div class="form-group"><label class="form-label">Koordinat Toko (Lat)</label><input type="text" class="form-control" value="-6.9147"></div>
+            <div class="form-group"><label class="form-label">Koordinat Toko (Lng)</label><input type="text" class="form-control" value="107.6098"></div>
+            <div class="form-group"><label class="form-label">Ongkir Flat (0–2km) — Rp</label><input type="number" class="form-control" value="5000"></div>
+            <div class="form-group"><label class="form-label">Biaya per Km Tambahan — Rp</label><input type="number" class="form-control" value="2000"></div>
+            <div class="form-group"><label class="form-label">Jangkauan Maksimal (km)</label><input type="number" class="form-control" value="12"></div>
+            <button class="btn btn-primary" onclick="showToast('Konfigurasi ongkir tersimpan!','success')">Simpan</button>
+          </div>
+        </div>
+
+        <!-- Payment Settings -->
+        <div class="table-card">
+          <div class="table-header"><div class="table-title">💳 Rekening Pembayaran</div></div>
+          <div style="padding:20px">
+            <div class="form-group"><label class="form-label">Bank BCA</label><input type="text" class="form-control" value="1234-567-890 (A/N Mlijoan Store)"></div>
+            <div class="form-group"><label class="form-label">Bank BNI</label><input type="text" class="form-control" value="987-654-321 (A/N Mlijoan Store)"></div>
+            <div class="form-group"><label class="form-label">GoPay</label><input type="text" class="form-control" value="0812-3456-7890 (Mlijoan)"></div>
+            <div class="form-group"><label class="form-label">OVO</label><input type="text" class="form-control" value="0812-3456-7890 (Mlijoan)"></div>
+            <button class="btn btn-primary" onclick="showToast('Rekening tersimpan!','success')">Simpan</button>
+          </div>
+        </div>
+
+        <!-- Jam Operasional -->
+        <div class="table-card">
+          <div class="table-header"><div class="table-title">🕐 Jam Operasional & Fitur</div></div>
+          <div style="padding:20px">
+            <div class="form-group"><label class="form-label">Jam Buka</label><input type="time" class="form-control" value="07:00"></div>
+            <div class="form-group"><label class="form-label">Jam Tutup</label><input type="time" class="form-control" value="21:00"></div>
+            <div class="divider"></div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div><div style="font-size:13px;font-weight:600">Terima Pesanan Baru</div><div style="font-size:12px;color:var(--neutral-500)">Aktifkan/nonaktifkan penerimaan order</div></div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div><div style="font-size:13px;font-weight:600">Notifikasi Push WA</div><div style="font-size:12px;color:var(--neutral-500)">Notif pesanan baru via WhatsApp</div></div>
+                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div><div style="font-size:13px;font-weight:600">Mode Maintenance</div><div style="font-size:12px;color:var(--neutral-500)">Tampilkan halaman maintenance ke pelanggan</div></div>
+                <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:20px" onclick="showToast('Pengaturan sistem tersimpan!','success')">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════ SECTION: CUSTOMERS ═══ -->
+    <section id="section-customers" class="admin-section">
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-header-left">
+            <div class="table-title">👥 Data Pelanggan</div>
+            <div class="table-subtitle">Semua pelanggan yang pernah bertransaksi di toko</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <input id="customer-search" type="text" placeholder="🔍 Cari nama / WA..."
+              oninput="renderCustomers()"
+              style="padding:8px 14px;border:1.5px solid var(--neutral-200);border-radius:var(--radius-md);font-size:13px;font-family:inherit;outline:none;width:210px"
+              onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--neutral-200)'">
+            <button onclick="openAddCustomerModal()" class="btn-primary" style="padding:8px 16px;font-size:13px;display:flex;align-items:center;gap:6px">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Tambah Pelanggan
+            </button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Pelanggan</th>
+                <th>No. WhatsApp</th>
+                <th>Alamat</th>
+                <th style="text-align:center">Transaksi</th>
+                <th style="text-align:right">Total Belanja</th>
+                <th>Bergabung</th>
+                <th style="text-align:center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="customers-table-body">
+              <tr><td colspan="7" style="text-align:center;padding:40px;color:#9ca3af">Memuat data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+<!-- ═══ MODAL: Add/Edit Customer ═══ -->
+<div id="customer-modal-overlay" onclick="if(event.target===this)closeCustomerModal()"
+  style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:5000;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:white;border-radius:20px;padding:28px;width:440px;max-width:95vw;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div>
+        <div id="customer-modal-title" style="font-size:17px;font-weight:800;color:#111827">Tambah Pelanggan Baru</div>
+        <div style="font-size:12px;color:#9ca3af;margin-top:2px">Data tersimpan untuk riwayat transaksi POS</div>
+      </div>
+      <button onclick="closeCustomerModal()" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:22px;line-height:1">&times;</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <label style="font-size:12px;font-weight:600;color:#374151;display:block;margin-bottom:6px">Nama Lengkap *</label>
+        <input id="cm-name" type="text" placeholder="Contoh: Budi Santoso"
+          style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box"
+          onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:#374151;display:block;margin-bottom:6px">No. WhatsApp *</label>
+        <div style="position:relative">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:#6b7280;font-weight:600">+62</span>
+          <input id="cm-wa" type="tel" placeholder="8123456789"
+            style="width:100%;padding:10px 12px 10px 44px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box"
+            onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:12px;font-weight:600;color:#374151;display:block;margin-bottom:6px">Alamat</label>
+        <textarea id="cm-address" placeholder="Jl. Merdeka No.1, RT 01/02, Kelurahan..." rows="2"
+          style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:none;box-sizing:border-box"
+          onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'"></textarea>
+      </div>
+    </div>
+    <input type="hidden" id="cm-id">
+    <div style="display:flex;gap:10px;margin-top:22px">
+      <button onclick="closeCustomerModal()" style="flex:1;padding:12px;background:#f3f4f6;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Batal</button>
+      <button onclick="saveCustomerModal()" style="flex:1;padding:12px;background:var(--primary);color:white;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Simpan Pelanggan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: POS Quick Add Customer ═══ -->
+<div id="pos-add-customer-overlay" onclick="if(event.target===this)posCloseAddCustomer()"
+  style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:6000;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:white;border-radius:20px;padding:24px;width:380px;max-width:95vw;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div>
+        <div style="font-size:15px;font-weight:800;color:#111827">Customer Baru</div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:2px">Langsung dipilih setelah disimpan</div>
+      </div>
+      <button onclick="posCloseAddCustomer()" style="background:none;border:none;cursor:pointer;color:#9ca3af;font-size:20px;line-height:1">&times;</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <input id="pac-name" type="text" placeholder="Nama lengkap *"
+        style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box"
+        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+      <input id="pac-wa" type="tel" placeholder="No. WhatsApp (081...)"
+        style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box"
+        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'">
+      <textarea id="pac-address" placeholder="Alamat (opsional)" rows="2"
+        style="width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:none;box-sizing:border-box"
+        onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='#e5e7eb'"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button onclick="posCloseAddCustomer()" style="flex:1;padding:11px;background:#f3f4f6;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Batal</button>
+      <button onclick="posSaveNewCustomer()" style="flex:1;padding:11px;background:var(--primary);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Simpan &amp; Pilih</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ═══════════ DRAWERS (slide from right, no popup) ═══════════ -->
+
+<!-- Order Detail Drawer -->
+<div id="order-detail-drawer" class="drawer-overlay" onclick="if(event.target===this||event.target===this.querySelector('.drawer-overlay::before'))closeDrawer('order-detail-drawer')">
+  <div class="drawer drawer-lg">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title" id="order-detail-title">Detail Pesanan</div>
+        <div class="drawer-subtitle">Informasi lengkap dan status pengiriman</div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer('order-detail-drawer')">✕</button>
+    </div>
+    <div class="drawer-body" id="order-detail-content"></div>
+  </div>
+</div>
+
+<!-- Product Add/Edit Drawer -->
+<div id="product-drawer" class="drawer-overlay" onclick="if(event.target.classList.contains('drawer-overlay'))closeDrawer('product-drawer')">
+  <div class="drawer">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title" id="product-drawer-title">➕ Tambah Produk</div>
+        <div class="drawer-subtitle">Isi semua kolom bertanda * wajib diisi</div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer('product-drawer')">✕</button>
+    </div>
+    <div class="drawer-body">
+      <form id="product-form" onsubmit="saveProduct(event)">
+        <div class="form-group">
+          <label class="form-label">Nama Produk *</label>
+          <input id="pf-name" type="text" class="form-control" placeholder="Contoh: Beras Premium Pandan Wangi" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Kategori *</label>
+            <select id="pf-category" class="form-control form-select" required>
+              <option value="sembako">🛒 Sembako</option>
+              <option value="sayur">🥦 Sayuran</option>
+              <option value="buah">🍊 Buah</option>
+              <option value="daging">🥩 Daging</option>
+              <option value="bumbu">🌶️ Bumbu</option>
+              <option value="minuman">🥤 Minuman</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Berat / Ukuran</label>
+            <input id="pf-weight" type="text" class="form-control" placeholder="1 Kg">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Harga (Rp) *</label>
+            <input id="pf-price" type="number" class="form-control" placeholder="15000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Satuan</label>
+            <input id="pf-unit" type="text" class="form-control" placeholder="/Kg">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Stok Saat Ini *</label>
+            <input id="pf-stock" type="number" class="form-control" placeholder="100" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kapasitas Maks</label>
+            <input id="pf-maxstock" type="number" class="form-control" placeholder="200">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Label / Badge</label>
+          <select class="form-control form-select" id="pf-badge">
+            <option value="">Tidak Ada</option>
+            <option value="Populer">🔥 Populer</option>
+            <option value="Terlaris">⭐ Terlaris</option>
+            <option value="Premium">💎 Premium</option>
+            <option value="-20%">🏷️ -20%</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deskripsi Singkat</label>
+          <textarea class="form-control form-textarea" id="pf-desc" placeholder="Deskripsi produk..."></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-ghost" onclick="closeDrawer('product-drawer')">Batal</button>
+      <button class="btn btn-primary" onclick="document.getElementById('product-form').requestSubmit()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Simpan Produk
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Stock Adjust Drawer -->
+<div id="stock-drawer" class="drawer-overlay" onclick="if(event.target.classList.contains('drawer-overlay'))closeDrawer('stock-drawer')">
+  <div class="drawer drawer-sm">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title">📦 Sesuaikan Stok</div>
+        <div class="drawer-subtitle" id="stock-product-name"></div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer('stock-drawer')">✕</button>
+    </div>
+    <div class="drawer-body">
+      <div style="display:flex;gap:16px;justify-content:center;margin-bottom:24px">
+        <div style="text-align:center;background:var(--neutral-50);border-radius:var(--radius-lg);padding:16px 24px;flex:1;border:1.5px solid var(--neutral-200)">
+          <div style="font-size:32px;font-weight:800;color:var(--neutral-800)" id="stock-current">—</div>
+          <div style="font-size:12px;color:var(--neutral-500);margin-top:4px">Stok Saat Ini</div>
+        </div>
+        <div style="text-align:center;background:var(--neutral-50);border-radius:var(--radius-lg);padding:16px 24px;flex:1;border:1.5px solid var(--neutral-200)">
+          <div style="font-size:32px;font-weight:800;color:var(--neutral-400)" id="stock-max">—</div>
+          <div style="font-size:12px;color:var(--neutral-500);margin-top:4px">Kapasitas Maks</div>
+        </div>
+      </div>
+      <div id="stock-progress-wrap" style="margin-bottom:24px">
+        <div class="progress-bar" style="height:12px"><div class="progress-fill" id="stock-progress-bar" style="width:0%"></div></div>
+        <div style="font-size:11px;color:var(--neutral-400);margin-top:4px;text-align:right" id="stock-pct-label">0%</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipe Penyesuaian</label>
+        <select id="stock-adj-type" class="form-control form-select">
+          <option value="add">➕ Tambah Stok (Barang Masuk)</option>
+          <option value="subtract">➖ Kurangi Stok (Keluar / Rusak)</option>
+          <option value="set">📌 Set Stok Manual</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Jumlah</label>
+        <input id="stock-adj" type="number" class="form-control" placeholder="Masukkan jumlah..." min="1" style="font-size:18px;height:52px;font-weight:700">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Catatan (Opsional)</label>
+        <input type="text" class="form-control" placeholder="Contoh: Pembelian dari supplier Pak Budi">
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-ghost" onclick="closeDrawer('stock-drawer')">Batal</button>
+      <button class="btn btn-primary" onclick="adjustStock()">Terapkan Perubahan</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reject Supplier Drawer -->
+<div id="reject-drawer" class="drawer-overlay" onclick="if(event.target.classList.contains('drawer-overlay'))closeDrawer('reject-drawer')">
+  <div class="drawer drawer-sm">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title" style="color:var(--error)">❌ Tolak Mitra</div>
+        <div class="drawer-subtitle" id="reject-supplier-name"></div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer('reject-drawer')">✕</button>
+    </div>
+    <div class="drawer-body">
+      <div style="background:#FFF5F5;border:1.5px solid #FED7D7;border-radius:var(--radius-lg);padding:14px;margin-bottom:20px;font-size:13px;color:var(--error)">
+        ⚠️ Penolakan ini bersifat permanen. Mitra dapat mendaftar ulang dengan data yang diperbaiki.
+      </div>
+      <div class="form-group">
+        <label class="form-label">Alasan Penolakan *</label>
+        <textarea id="reject-reason" class="form-control form-textarea" placeholder="Contoh: Dokumen tidak lengkap, wilayah di luar jangkauan, dsb." required style="min-height:120px"></textarea>
+        <div class="input-hint">Alasan ini akan dikirimkan via WhatsApp ke mitra yang ditolak.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Pilih Alasan Cepat</label>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button type="button" class="btn btn-ghost" style="justify-content:flex-start;text-align:left;font-weight:500" onclick="document.getElementById('reject-reason').value='Dokumen SIUP/NIB tidak lengkap atau tidak valid.'">📄 Dokumen tidak lengkap</button>
+          <button type="button" class="btn btn-ghost" style="justify-content:flex-start;text-align:left;font-weight:500" onclick="document.getElementById('reject-reason').value='Lokasi gudang/kebun di luar jangkauan wilayah mitra Mlijoan.'">📍 Lokasi di luar jangkauan</button>
+          <button type="button" class="btn btn-ghost" style="justify-content:flex-start;text-align:left;font-weight:500" onclick="document.getElementById('reject-reason').value='Kategori produk belum dibutuhkan saat ini. Kami akan menghubungi kembali jika ada kebutuhan.'">🛒 Kategori tidak dibutuhkan</button>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-ghost" onclick="closeDrawer('reject-drawer')">Batal</button>
+      <button class="btn btn-danger" onclick="confirmReject()">Konfirmasi Penolakan</button>
+    </div>
+  </div>
+</div>
+
+<!-- Supplier Detail Drawer -->
+<div id="supplier-detail-drawer" class="drawer-overlay" onclick="if(event.target.classList.contains('drawer-overlay'))closeDrawer('supplier-detail-drawer')">
+  <div class="drawer">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title">👁 Detail Mitra Supplier</div>
+        <div class="drawer-subtitle">Informasi lengkap pendaftar mitra</div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer('supplier-detail-drawer')">✕</button>
+    </div>
+    <div class="drawer-body" id="supplier-detail-content"></div>
+    <div class="drawer-footer" id="supplier-detail-footer"></div>
+  </div>
+</div>
+
+<!-- Promo Add/Edit Drawer -->
+<div id="promo-drawer" class="drawer-overlay" onclick="if(event.target.classList.contains('drawer-overlay'))closeDrawer('promo-drawer')">
+  <div class="drawer">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title" id="promo-drawer-title">➕ Tambah Kode Promo</div>
+        <div class="drawer-subtitle">Konfigurasi diskon untuk pelanggan</div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer('promo-drawer')">✕</button>
+    </div>
+    <div class="drawer-body">
+      <form id="promo-form" onsubmit="savePromo(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Kode Promo *</label>
+            <input id="prom-code" type="text" class="form-control" placeholder="MLIJOAN10" style="text-transform:uppercase;font-weight:700;letter-spacing:1px" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipe Diskon *</label>
+            <select id="prom-type" class="form-control form-select" required>
+              <option value="percent">% Persentase</option>
+              <option value="shipping">🚚 Gratis Ongkir</option>
+              <option value="flat">💰 Flat (Rp)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nilai Diskon *</label>
+            <input id="prom-value" type="number" class="form-control" placeholder="10" required>
+            <div class="input-hint">% untuk persentase, Rp ribu untuk flat/ongkir</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Min. Order (Rp)</label>
+            <input id="prom-min" type="number" class="form-control" placeholder="50000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Maks Pemakaian</label>
+            <input id="prom-max" type="number" class="form-control" placeholder="100">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Berlaku Hingga</label>
+            <input id="prom-expiry" type="text" class="form-control" placeholder="31 Des 2026">
+          </div>
+        </div>
+        <div style="background:var(--primary-50);border-radius:var(--radius-md);padding:14px;margin-top:8px;font-size:13px;color:var(--primary)">
+          💡 Promo dapat diuji di halaman keranjang pelanggan menggunakan kode yang sudah diisi.
+        </div>
+      </form>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-ghost" onclick="closeDrawer('promo-drawer')">Batal</button>
+      <button class="btn btn-primary" onclick="document.getElementById('promo-form').requestSubmit()">Simpan Promo</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="admin-toast" class="admin-toast" role="alert" aria-live="polite"></div>
+
+<script src="js/admin.js"></script>
+<script>
+  // ─── Drawer helpers ───
+  function openDrawer(id) {
+    document.getElementById(id)?.classList.add('open');
+  }
+  function closeDrawer(id) {
+    document.getElementById(id)?.classList.remove('open');
+  }
+  // Back-compat aliases
+  function openModal(id)  { openDrawer(id.replace('-modal','-drawer').replace('order-detail-drawer','order-detail-drawer')); }
+  function closeModal(id) { closeDrawer(id.replace('-modal','-drawer')); }
+
+  // Override admin.js functions to use drawers
+  const _origOpenProduct  = window.openAddProduct;
+  const _origOpenEditProd = window.openEditProduct;
+  const _origOpenStock    = window.openStockModal;
+  const _origOpenReject   = window.openRejectModal;
+  const _origOpenSupDet   = window.openSupplierDetail;
+  const _origOpenOrder    = window.openOrderDetail;
+  const _origAddPromo     = window.openAddPromo;
+  const _origEditPromo    = window.openEditPromo;
+
+  window.openAddProduct = function() {
+    AdminState.editingProduct = null;
+    document.getElementById('product-drawer-title').textContent = '➕ Tambah Produk';
+    document.getElementById('product-form').reset();
+    openDrawer('product-drawer');
+  };
+  window.openEditProduct = function(id) {
+    const p = PRODUCTS.find(p => p.id === id);
+    if (!p) return;
+    AdminState.editingProduct = id;
+    document.getElementById('product-drawer-title').textContent = '✏️ Edit Produk — ' + p.name;
+    document.getElementById('pf-name').value     = p.name;
+    document.getElementById('pf-category').value = p.category;
+    document.getElementById('pf-price').value    = p.price;
+    document.getElementById('pf-unit').value     = p.unit;
+    document.getElementById('pf-weight').value   = p.weight;
+    document.getElementById('pf-stock').value    = p.stock;
+    document.getElementById('pf-maxstock').value = p.maxStock;
+    openDrawer('product-drawer');
+  };
+  window.openStockModal = function(id) {
+    const p = PRODUCTS.find(p => p.id === id);
+    if (!p) return;
+    AdminState.editingProduct = id;
+    document.getElementById('stock-product-name').textContent = p.name;
+    document.getElementById('stock-current').textContent = p.stock;
+    document.getElementById('stock-max').textContent     = p.maxStock;
+    document.getElementById('stock-adj').value = '';
+    const pct = Math.round(p.stock / p.maxStock * 100);
+    const bar = document.getElementById('stock-progress-bar');
+    if (bar) {
+      bar.style.width = pct + '%';
+      bar.style.background = pct <= 15 ? 'var(--error)' : pct <= 30 ? 'var(--warning)' : 'var(--primary)';
+    }
+    const lbl = document.getElementById('stock-pct-label');
+    if (lbl) lbl.textContent = pct + '% terisi';
+    openDrawer('stock-drawer');
+  };
+  window.openRejectModal = function(id) {
+    AdminState.selectedSupplierId = id;
+    const s = SUPPLIERS.find(s => s.id === id);
+    document.getElementById('reject-supplier-name').textContent = s?.name || '';
+    document.getElementById('reject-reason').value = '';
+    openDrawer('reject-drawer');
+  };
+  window.openSupplierDetail = function(id) {
+    const s = SUPPLIERS.find(s => s.id === id);
+    if (!s) return;
+    AdminState.selectedSupplierId = id;
+    const content = document.getElementById('supplier-detail-content');
+    content.innerHTML = `
+      <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:var(--radius-lg);padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:20px">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:24px;color:white;flex-shrink:0">🤝</div>
+        <div>
+          <div style="font-size:17px;font-weight:700;color:white">${s.name}</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.8)">${s.biz}</div>
+          <div style="margin-top:6px">${statusBadge(s.status)}</div>
+        </div>
+      </div>
+      ${[
+        ['Kategori Pasokan', s.category],
+        ['WhatsApp', s.phone],
+        ['Alamat Gudang/Kebun', s.address],
+        ['Produk Ditawarkan', s.products],
+        ['Kapasitas Produksi', s.capacity],
+        ['Tanggal Daftar', s.date],
+      ].map(([l,v]) => `<div class="info-row"><span class="info-row-label">${l}</span><span class="info-row-value">${v}</span></div>`).join('')}
+      ${s.notes  ? `<div style="margin-top:14px;background:var(--neutral-50);border-radius:var(--radius-md);padding:12px;font-size:13px;color:var(--neutral-600)">📝 <strong>Catatan:</strong> ${s.notes}</div>` : ''}
+      ${s.reason ? `<div style="margin-top:14px;background:#FFF5F5;border-radius:var(--radius-md);padding:12px;font-size:13px;color:var(--error)">❌ <strong>Alasan Penolakan:</strong> ${s.reason}</div>` : ''}
+      ${s.hasFiles ? `<div style="margin-top:14px;background:#EBF8FF;border-radius:var(--radius-md);padding:12px;font-size:13px;color:var(--info)">📎 Dokumen pendukung sudah diupload</div>` : ''}
+    `;
+    const footer = document.getElementById('supplier-detail-footer');
+    footer.innerHTML = s.status === 'pending' ? `
+      <button class="btn btn-ghost" onclick="closeDrawer('supplier-detail-drawer')">Tutup</button>
+      <button class="btn btn-danger" onclick="closeDrawer('supplier-detail-drawer');openRejectModal('${s.id}')">✕ Tolak</button>
+      <button class="btn btn-primary" onclick="approveSupplier('${s.id}');closeDrawer('supplier-detail-drawer')">✓ Setujui Mitra</button>
+    ` : `
+      <button class="btn btn-ghost" onclick="closeDrawer('supplier-detail-drawer')">Tutup</button>
+      ${s.status === 'approved' ? `<a href="https://wa.me/${s.phone}" target="_blank" class="btn btn-primary" style="background:#25D366">💬 Hubungi via WA</a>` : ''}
+    `;
+    openDrawer('supplier-detail-drawer');
+  };
+  window.openOrderDetail = function(orderId) {
+    const o = ORDERS.find(o => o.id === orderId);
+    if (!o) return;
+    AdminState.selectedOrderId = orderId;
+    const steps = [
+      { label:'Pesanan Dibuat',    done:true },
+      { label:'Menunggu Transfer', done:o.status !== 'pending' },
+      { label:'Diproses',          done:['processing','delivery','completed'].includes(o.status) },
+      { label:'Dalam Pengiriman',  done:['delivery','completed'].includes(o.status) },
+      { label:'Selesai',           done:o.status === 'completed' },
+    ];
+    document.getElementById('order-detail-title').textContent = 'Pesanan #' + o.id;
+    document.getElementById('order-detail-content').innerHTML = `
+      <div style="background:linear-gradient(135deg,var(--primary-50),var(--primary-100));border-radius:var(--radius-lg);padding:16px;margin-bottom:20px;display:flex;align-items:center;gap:12px">
+        <div style="font-size:32px">${{pending:'⏳',processing:'⚙️',delivery:'🚚',completed:'✅',cancelled:'❌'}[o.status]||'📦'}</div>
+        <div>
+          <div style="font-size:15px;font-weight:700">${statusBadge(o.status)}</div>
+          <div style="font-size:12px;color:var(--neutral-600);margin-top:4px">Dijadwalkan: ${o.scheduled}</div>
+        </div>
+      </div>
+      ${[['ID Pesanan','#'+o.id],['Pelanggan',o.customer],['Telepon',o.phone],['Alamat',o.address],['Pembayaran',o.payment]].map(([l,v])=>`<div class="info-row"><span class="info-row-label">${l}</span><span class="info-row-value">${v}</span></div>`).join('')}
+      <div class="divider"></div>
+      <div style="font-size:12px;font-weight:700;color:var(--neutral-500);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px">Tracking Pengiriman</div>
+      <div style="position:relative;padding-left:22px;margin-bottom:20px">
+        ${steps.map((s,i)=>`
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:${i<steps.length-1?'18px':'0'};position:relative">
+            <div style="position:absolute;left:-18px;top:3px;width:10px;height:10px;border-radius:50%;background:${s.done?'var(--primary)':'var(--neutral-300)'};z-index:1"></div>
+            ${i<steps.length-1?`<div style="position:absolute;left:-14px;top:13px;width:2px;height:18px;background:${steps[i+1].done?'var(--primary)':'var(--neutral-200)'}"></div>`:''}
+            <span style="font-size:13px;font-weight:${s.done?'600':'400'};color:${s.done?'var(--neutral-800)':'var(--neutral-400)'}">${s.label}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="divider"></div>
+      <div style="font-size:13px;font-weight:700;color:var(--neutral-700);margin-bottom:10px">Item Pesanan</div>
+      ${o.items.map(item=>`
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--neutral-100)">
+          <span style="font-size:13px;color:var(--neutral-700)">${item.name} × ${item.qty}</span>
+          <span class="num-green">${fmt(item.price*item.qty)}</span>
+        </div>
+      `).join('')}
+      <div style="display:flex;justify-content:space-between;padding:14px 0;font-weight:800;font-size:16px">
+        <span>Total</span><span class="num-green">${fmt(o.total)}</span>
+      </div>
+      ${o.proof ? `
+        <div class="divider"></div>
+        <div style="font-size:13px;font-weight:700;color:var(--neutral-700);margin-bottom:10px">Bukti Transfer</div>
+        <div class="proof-img-wrap" style="position:relative;margin-bottom:14px">
+          <img src="images/sembako.png" style="opacity:0.3;width:100%;max-height:150px;object-fit:cover">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--neutral-500)">[Preview Bukti Transfer]</div>
+        </div>
+        ${o.status==='pending'?`<div style="display:flex;gap:10px">
+          <button class="btn btn-primary flex-1" onclick="updateOrderStatus('${o.id}','processing');closeDrawer('order-detail-drawer')">✅ Konfirmasi & Proses</button>
+          <button class="btn btn-danger" onclick="updateOrderStatus('${o.id}','cancelled');closeDrawer('order-detail-drawer')">❌ Tolak</button>
+        </div>`:'<div style="color:var(--primary);font-size:12px;font-weight:600">✅ Transfer sudah dikonfirmasi</div>'}
+      ` : `<div style="background:#FFF5F5;border-radius:var(--radius-md);padding:12px;font-size:13px;color:var(--error)">⚠️ Bukti transfer belum diupload pelanggan</div>`}
+    `;
+    openDrawer('order-detail-drawer');
+  };
+  window.openAddPromo = function() {
+    document.getElementById('promo-form').reset();
+    AdminState.editingPromo = null;
+    document.getElementById('promo-drawer-title').textContent = '➕ Tambah Kode Promo';
+    openDrawer('promo-drawer');
+  };
+  window.openEditPromo = function(id) {
+    const pc = PROMO_CODES.find(p => p.id === id);
+    if (!pc) return;
+    AdminState.editingPromo = id;
+    document.getElementById('promo-drawer-title').textContent = '✏️ Edit Promo — ' + pc.code;
+    document.getElementById('prom-code').value   = pc.code;
+    document.getElementById('prom-type').value   = pc.type;
+    document.getElementById('prom-value').value  = pc.value;
+    document.getElementById('prom-min').value    = pc.minOrder;
+    document.getElementById('prom-max').value    = pc.maxUse;
+    document.getElementById('prom-expiry').value = pc.expiry;
+    openDrawer('promo-drawer');
+  };
+
+  // Override confirmReject to use drawer IDs
+  const _origConfirmReject = window.confirmReject;
+  window.confirmReject = function() {
+    const reason = document.getElementById('reject-reason').value.trim();
+    if (!reason) { showToast('Tulis alasan penolakan terlebih dahulu', 'error'); return; }
+    const s = SUPPLIERS.find(s => s.id === AdminState.selectedSupplierId);
+    if (s) {
+      s.status = 'rejected'; s.reason = reason;
+      showToast('Mitra ' + s.name + ' ditolak.', 'error');
+      closeDrawer('reject-drawer');
+      renderSuppliers(); updateKPIs();
+    }
+  };
+
+  // Donut legend
+  const legendEl = document.getElementById('donut-legend');
+  if (legendEl) {
+    const colors = ['#1E9E4E','#2ECC70','#F7C948','#FF6B35','#A0AEC0'];
+    legendEl.innerHTML = CATEGORY_SALES.map((c,i) => `
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="width:10px;height:10px;border-radius:2px;background:${colors[i]};display:inline-block;flex-shrink:0"></span>
+          <span style="font-size:12px;color:var(--neutral-700)">${c.label}</span>
+        </div>
+        <span style="font-size:12px;font-weight:700;color:${colors[i]}">${c.value}%</span>
+      </div>
+    `).join('');
+  }
+
+  // Transfer stats
+  function updateTransferStats() {
+    const pending = ORDERS.filter(o => o.status === 'pending');
+    const el1 = document.getElementById('transfer-stat-pending');
+    const el2 = document.getElementById('transfer-stat-value');
+    if (el1) el1.textContent = pending.length;
+    if (el2) el2.textContent = 'Rp ' + (pending.reduce((s,o)=>s+o.total,0)/1000).toFixed(0) + 'K';
+  }
+  const _origNav = navigateTo;
+  window.navigateTo = function(section) {
+    _origNav(section);
+    if (section === 'transfer') { renderTransfer(); updateTransferStats(); }
+  };
+</script>
+</body>
+</html>

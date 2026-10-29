@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mlijoan — Sembako & Pangan Segar, Langsung dari Petani Lokal</title>
+  <meta name="description" content="Belanja sembako, sayuran, buah, dan pangan segar berkualitas di Mlijoan. Pengiriman cepat area Bandung, harga terjangkau.">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1E9E4E">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<!-- ══ TOP BAR ══ -->
+<div class="top-bar">
+  <div class="top-bar-scroll">
+    <div class="top-bar-item">📍 Bandung, Jawa Barat</div>
+    <div class="top-bar-dot">·</div>
+    <div class="top-bar-item"><a href="tel:081234567890">📞 0812-3456-7890</a></div>
+    <div class="top-bar-dot">·</div>
+    <div class="top-bar-item"><a href="mailto:cs@mlijoan.id">✉️ cs@mlijoan.id</a></div>
+    <div class="top-bar-dot">·</div>
+    <div class="top-bar-badge">🚚 Gratis Ongkir s.d 3 Km</div>
+    <div class="top-bar-dot">·</div>
+    <div class="top-bar-item">⏰ Buka 07.00–21.00 WIB</div>
+    <a href="admin.html" class="top-bar-admin">🔧 Admin</a>
+  </div>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="site-header">
+  <!-- Row 1: Logo + Icons -->
+  <div class="header-row-1">
+    <a href="landing.html" class="header-logo">
+      <img src="images/logo.png" alt="Mlijoan" class="header-logo-img">
+      <div>
+        <div class="header-logo-name">Mlijoan</div>
+        <div class="header-logo-tag">Pangan Segar Terpercaya</div>
+      </div>
+    </a>
+    <div class="header-icons">
+      <button class="hdr-icon" onclick="requireLogin('profile')" title="Masuk / Profil" id="hdr-login-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="hdr-login-label">Masuk</span>
+      </button>
+      <button class="hdr-icon" onclick="requireLogin('orders')" title="Pesanan Saya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        Pesanan
+      </button>
+      <button class="hdr-icon" onclick="requireLogin('cart')" title="Keranjang" style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Keranjang
+        <span class="hdr-badge" id="header-cart-count" style="display:none">0</span>
+      </button>
+      <a href="https://wa.me/6281234567890" target="_blank" class="hdr-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.12 1.528 5.856L0 24l6.335-1.508A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.946 0-3.764-.534-5.318-1.46l-.383-.227-3.962.943.945-3.86-.249-.396A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Chat Kami
+      </a>
+    </div>
+  </div>
+  <!-- Row 2: Search -->
+  <div class="header-row-2">
+    <div class="header-search-bar">
+      <div class="search-icon-inner">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <input type="text" id="main-search" placeholder="Cari beras, sayur, buah, daging..." autocomplete="off">
+      <button class="search-submit" onclick="doSearch()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Cari
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ══ CATEGORY NAV ══ -->
+<nav class="cat-nav" id="cat-nav" aria-label="Kategori">
+  <div class="cat-nav-scroll">
+    <div class="cat-nav-item active" data-cat="all"      onclick="setActiveCat('all',this)"><span class="cat-emoji">🏠</span> Semua</div>
+    <div class="cat-nav-item"        data-cat="sembako"  onclick="setActiveCat('sembako',this)"><span class="cat-emoji">🛒</span> Sembako</div>
+    <div class="cat-nav-item"        data-cat="sayur"    onclick="setActiveCat('sayur',this)"><span class="cat-emoji">🥦</span> Sayuran</div>
+    <div class="cat-nav-item"        data-cat="buah"     onclick="setActiveCat('buah',this)"><span class="cat-emoji">🍊</span> Buah-buahan</div>
+    <div class="cat-nav-item"        data-cat="daging"   onclick="setActiveCat('daging',this)"><span class="cat-emoji">🥩</span> Daging &amp; Telur</div>
+    <div class="cat-nav-item"        data-cat="bumbu"    onclick="setActiveCat('bumbu',this)"><span class="cat-emoji">🌶️</span> Bumbu</div>
+    <div class="cat-nav-item"        data-cat="minuman"  onclick="setActiveCat('minuman',this)"><span class="cat-emoji">🥤</span> Minuman</div>
+    <div class="cat-nav-item"        onclick="goToSection('promo')"><span class="cat-emoji">🏷️</span> Promo</div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero-section">
+  <!-- Desktop: side-by-side via .hero-layout wrapper -->
+  <div id="hero-layout" class="hero-layout" style="display:contents">
+
+    <!-- Main Carousel -->
+    <div class="hero-main" id="hero-carousel">
+      <div class="hero-slide active">
+        <img src="images/hero_banner.png" alt="Segar dari Petani Lokal">
+        <div class="hero-slide-overlay">
+          <div class="hero-slide-text">
+            <h1>Segar Langsung<br>dari Petani Lokal</h1>
+            <p>Sayuran, buah & sembako pilihan dikirim ke pintu rumah Anda.</p>
+            <button class="hero-cta" onclick="goToSection('popular')">Belanja Sekarang →</button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <img src="images/banner_sembako.png" alt="Sembako Lengkap">
+        <div class="hero-slide-overlay">
+          <div class="hero-slide-text">
+            <h1>Sembako Lengkap,<br>Harga Terjangkau</h1>
+            <p>Beras, minyak, gula — semua tersedia dengan harga grosir.</p>
+            <button class="hero-cta white" onclick="setActiveCat('sembako')">Lihat Sembako →</button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <img src="images/promo_banner.png" alt="Promo Spesial">
+        <div class="hero-slide-overlay" style="background:linear-gradient(to right,rgba(20,60,30,0.72),transparent)">
+          <div class="hero-slide-text">
+            <h1>Promo Spesial<br>Pelanggan Baru</h1>
+            <p>Gunakan kode <strong style="color:#F7C948">NEWUSER50</strong> — hemat Rp 50.000!</p>
+            <button class="hero-cta" onclick="requireLogin('register')">Daftar Gratis →</button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-dots" id="hero-dots">
+        <div class="hero-dot active" onclick="goToSlide(0,event)"></div>
+        <div class="hero-dot" onclick="goToSlide(1,event)"></div>
+        <div class="hero-dot" onclick="goToSlide(2,event)"></div>
+      </div>
+    </div>
+
+    <!-- Sub Banners -->
+    <div class="hero-sub-banners">
+      <div class="hero-sub-card" onclick="setActiveCat('sayur')">
+        <img src="images/fresh_produce.png" alt="Sayuran Organik">
+        <div class="hero-sub-overlay">
+          <div>
+            <div class="hero-sub-badge">BARU</div>
+            <div class="hero-sub-text">Sayuran<br>Organik Segar</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-sub-card" onclick="goToSection('flash')">
+        <img src="images/sembako.png" alt="Flash Sale">
+        <div class="hero-sub-overlay" style="background:linear-gradient(to right,rgba(200,70,10,0.65),transparent)">
+          <div>
+            <div class="hero-sub-badge" style="background:var(--accent);color:#1a1a1a">FLASH</div>
+            <div class="hero-sub-text">Sembako<br>Diskon 20%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ TRUST BAR ══ -->
+<div class="trust-bar">
+  <div class="trust-scroll">
+    <div class="trust-item">🚚 Pengiriman Cepat 2–4 Jam</div>
+    <div class="trust-item">🌿 Produk Segar Berkualitas</div>
+    <div class="trust-item">🤝 Langsung dari Petani Lokal</div>
+    <div class="trust-item">💳 Pembayaran Aman & Mudah</div>
+    <div class="trust-item">📞 CS 07.00–21.00 WIB</div>
+  </div>
+</div>
+
+<!-- ══ KATEGORI ══ -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Belanja per <span>Kategori</span></div>
+      <div class="section-sub">Semua kebutuhan dapur Anda</div>
+    </div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="setActiveCat('sembako')">
+      <div class="cat-card-icon" style="background:#FFF3E0">🛒</div>
+      <div class="cat-card-name">Sembako</div>
+      <div class="cat-card-count">48 produk</div>
+    </div>
+    <div class="cat-card" onclick="setActiveCat('sayur')">
+      <div class="cat-card-icon" style="background:#F0FFF4">🥦</div>
+      <div class="cat-card-name">Sayuran</div>
+      <div class="cat-card-count">32 produk</div>
+    </div>
+    <div class="cat-card" onclick="setActiveCat('buah')">
+      <div class="cat-card-icon" style="background:#FFFBEB">🍊</div>
+      <div class="cat-card-name">Buah-buahan</div>
+      <div class="cat-card-count">24 produk</div>
+    </div>
+    <div class="cat-card" onclick="setActiveCat('daging')">
+      <div class="cat-card-icon" style="background:#FFF5F5">🥩</div>
+      <div class="cat-card-name">Daging &amp; Telur</div>
+      <div class="cat-card-count">18 produk</div>
+    </div>
+    <div class="cat-card" onclick="setActiveCat('bumbu')">
+      <div class="cat-card-icon" style="background:#FFF5F5">🌶️</div>
+      <div class="cat-card-name">Bumbu &amp; Rempah</div>
+      <div class="cat-card-count">26 produk</div>
+    </div>
+    <div class="cat-card" onclick="setActiveCat('minuman')">
+      <div class="cat-card-icon" style="background:#EBF8FF">🥤</div>
+      <div class="cat-card-name">Minuman</div>
+      <div class="cat-card-count">15 produk</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FLASH SALE ══ -->
+<section class="section section-alt" id="flash">
+  <div class="flash-header">
+    <span class="flash-label">⚡ FLASH SALE</span>
+    <span class="flash-title">Harga Kilat</span>
+    <div class="flash-timer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div class="timer-box" id="timer-h">08</div>
+      <span class="timer-sep">:</span>
+      <div class="timer-box" id="timer-m">34</div>
+      <span class="timer-sep">:</span>
+      <div class="timer-box" id="timer-s">59</div>
+    </div>
+    <a href="#" class="see-all" onclick="return false">Semua →</a>
+  </div>
+  <div class="product-scroll" id="flash-row"></div>
+</section>
+
+<!-- ══ PRODUK POPULER ══ -->
+<section class="section" id="popular">
+  <div class="section-header">
+    <div>
+      <div class="section-title">🔥 Produk <span>Populer</span></div>
+      <div class="section-sub">Terlaris minggu ini</div>
+    </div>
+    <a class="see-all" href="#" onclick="return false">Lihat Semua →</a>
+  </div>
+  <div class="product-grid" id="popular-grid"></div>
+</section>
+
+<!-- ══ PROMO BANNERS ══ -->
+<section class="section section-alt" id="promo">
+  <div class="section-header">
+    <div>
+      <div class="section-title">🏷️ Penawaran <span>Spesial</span></div>
+    </div>
+  </div>
+  <div class="promo-strip">
+    <div class="promo-card" onclick="setActiveCat('sayur')">
+      <img src="images/fresh_produce.png" alt="Sayur Organik">
+      <div class="promo-overlay">
+        <h3>Sayuran Organik<br>Bersertifikat</h3>
+        <p>Tanpa pestisida, dipanen segar setiap pagi</p>
+        <div class="promo-btn">Belanja →</div>
+      </div>
+    </div>
+    <div class="promo-card" onclick="setActiveCat('sembako')">
+      <img src="images/sembako.png" alt="Sembako">
+      <div class="promo-overlay" style="background:linear-gradient(to right,rgba(180,60,0,0.65),transparent)">
+        <h3>Sembako Grosir<br>Harga Spesial</h3>
+        <p>Beli 5+ item, hemat 15% otomatis</p>
+        <div class="promo-btn">Lihat →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUK SPESIAL HARI INI ══ -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">🌟 Spesial <span>Hari Ini</span></div>
+      <div class="section-sub">Stok terbatas, harga ekstra hemat</div>
+    </div>
+    <a class="see-all" href="#" onclick="return false">Semua →</a>
+  </div>
+  <div class="product-scroll" id="special-row"></div>
+</section>
+
+<!-- ══ MITRA SUPPLIER ══ -->
+<section class="mitra-section">
+  <div class="mitra-banner">
+    <h2>Bergabung Menjadi<br>Mitra Supplier Mlijoan</h2>
+    <p>Kami membuka kesempatan bagi petani, peternak, dan distributor lokal untuk memasok produk segar ke pelanggan setia Mlijoan di area Bandung.</p>
+    <div class="mitra-stats">
+      <div>
+        <div class="mitra-stat-num">150+</div>
+        <div class="mitra-stat-label">Pelanggan Aktif</div>
+      </div>
+      <div>
+        <div class="mitra-stat-num">12+</div>
+        <div class="mitra-stat-label">Mitra Supplier</div>
+      </div>
+      <div>
+        <div class="mitra-stat-num">98%</div>
+        <div class="mitra-stat-label">Kepuasan</div>
+      </div>
+    </div>
+    <div class="mitra-btns">
+      <button class="mitra-btn-primary" onclick="window.location.href='auth.html?redirect=mitra'">🤝 Daftar Mitra</button>
+      <a href="https://wa.me/6281234567890" target="_blank" class="mitra-btn-secondary">💬 Tanya via WA</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="section section-alt">
+  <div class="section-header">
+    <div>
+      <div class="section-title">💬 Kata <span>Pelanggan</span></div>
+      <div class="section-sub">1.240+ ulasan positif</div>
+    </div>
+  </div>
+  <div class="testimonials-scroll">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Bayamnya segar banget, beda jauh sama supermarket. Dikirim pagi, masak siang masih crunchy. Langganan terus!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Siti Rahayu</div>
+          <div class="testi-meta">Dago, Bandung · Jan 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Berasnya pulen, harga gak beda jauh sama grosir tapi lebih praktis karena diantar ke rumah. Recommended!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👨</div>
+        <div>
+          <div class="testi-name">Budi Santoso</div>
+          <div class="testi-meta">Antapani, Bandung · Mar 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★☆</div>
+      <p class="testi-text">"Daging sapinya segar, potongan rapi sesuai pesanan. CS responsif banget kalau ada pertanyaan."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Dewi Kusuma</div>
+          <div class="testi-meta">Cihampelas, Bandung · Feb 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Suka banget sama flash sale-nya! Hemat banyak tiap hari. Packagingnya rapi, sayur tetap segar sampai rumah."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Rina Permata</div>
+          <div class="testi-meta">Cicendo, Bandung · Apr 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rating-summary">
+    <div class="rating-big">
+      <div class="rating-big-num">4.8</div>
+      <div class="rating-big-stars">★★★★★</div>
+      <div class="rating-big-label">1.240 Ulasan</div>
+    </div>
+    <div class="rating-bars">
+      <div class="rbar-row"><span class="rbar-label">5★</span><div class="rbar-track"><div class="rbar-fill" style="width:78%"></div></div><span class="rbar-pct">78%</span></div>
+      <div class="rbar-row"><span class="rbar-label">4★</span><div class="rbar-track"><div class="rbar-fill" style="width:15%;opacity:.7"></div></div><span class="rbar-pct">15%</span></div>
+      <div class="rbar-row"><span class="rbar-label">3★</span><div class="rbar-track"><div class="rbar-fill" style="width:5%;opacity:.5"></div></div><span class="rbar-pct">5%</span></div>
+      <div class="rbar-row"><span class="rbar-label">≤2★</span><div class="rbar-track"><div class="rbar-fill" style="width:2%;opacity:.3"></div></div><span class="rbar-pct">2%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ APP BANNER ══ -->
+<section class="app-banner">
+  <h2>📱 Belanja Lebih Mudah!</h2>
+  <p>Install Mlijoan PWA di smartphone Anda — tidak perlu download, langsung buka di browser. Gratis!</p>
+  <div class="app-btns">
+    <a href="auth.html" class="app-btn">
+      <div class="app-btn-icon">📱</div>
+      <div class="app-btn-text">
+        <small>Mulai Belanja</small>
+        <span>Daftar Gratis</span>
+      </div>
+    </a>
+    <a href="https://wa.me/6281234567890" target="_blank" class="app-btn" style="background:rgba(255,255,255,0.15);color:white">
+      <div class="app-btn-icon">💬</div>
+      <div class="app-btn-text" style="text-align:left">
+        <small style="color:rgba(255,255,255,.6)">Chat dengan kami</small>
+        <span style="color:white">WhatsApp</span>
+      </div>
+    </a>
+  </div>
+  <div class="app-features">✅ Offline support · ✅ Push notif · ✅ Fast load · ✅ Gratis</div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-grid-full">
+  <div class="footer-brand">
+    <div class="footer-brand-name">🛒 Mlijoan</div>
+    <div class="footer-brand-tag">Sembako & Pangan Segar Terpercaya</div>
+    <p>Platform O2O sembako dan pangan segar yang menghubungkan konsumen dengan petani dan supplier lokal terbaik di Bandung.</p>
+    <div class="footer-social">
+      <div class="footer-soc-btn">📘</div>
+      <div class="footer-soc-btn">📸</div>
+      <div class="footer-soc-btn">🐦</div>
+      <a href="https://wa.me/6281234567890" target="_blank" class="footer-soc-btn">💬</a>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px">Metode Pembayaran:</div>
+    <div class="footer-payment">
+      <span class="footer-pay-badge">BCA</span>
+      <span class="footer-pay-badge">BNI</span>
+      <span class="footer-pay-badge">GoPay</span>
+      <span class="footer-pay-badge">OVO</span>
+      <span class="footer-pay-badge">Transfer</span>
+    </div>
+  </div>
+  <div class="footer-cols">
+    <div>
+      <div class="footer-col-title">Belanja</div>
+      <div class="footer-links">
+        <a href="#" onclick="setActiveCat('sembako');return false">🛒 Sembako</a>
+        <a href="#" onclick="setActiveCat('sayur');return false">🥦 Sayuran Segar</a>
+        <a href="#" onclick="setActiveCat('buah');return false">🍊 Buah-buahan</a>
+        <a href="#" onclick="setActiveCat('daging');return false">🥩 Daging &amp; Telur</a>
+        <a href="#" onclick="goToSection('promo');return false">🏷️ Promo &amp; Diskon</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Akun &amp; Bantuan</div>
+      <div class="footer-links">
+        <a href="auth.html">📱 Login / Daftar</a>
+        <a href="auth.html?redirect=orders">📦 Cek Pesanan</a>
+        <a href="auth.html?redirect=mitra">🤝 Daftar Mitra</a>
+        <a href="#">❓ FAQ</a>
+        <a href="#">🔒 Privasi</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontak</div>
+      <div class="footer-links">
+        <a>📍 Jl. Pasar Baru No.1, Bandung</a>
+        <a href="tel:081234567890">📞 0812-3456-7890</a>
+        <a href="mailto:cs@mlijoan.id">✉️ cs@mlijoan.id</a>
+        <a>⏰ Senin–Minggu 07.00–21.00</a>
+      </div>
+    </div>
+  </div>
+  </div><!-- /.footer-grid-full -->
+  <a href="https://wa.me/6281234567890" target="_blank" class="footer-wa-btn">
+    💬 Chat WhatsApp Sekarang
+  </a>
+  <div class="footer-bottom">
+    <span>© 2026 Mlijoan. Hak Cipta Dilindungi. Made with ❤️ in Bandung.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privasi</a>
+      <a href="#">Syarat</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ FLOATING CART BAR ══ -->
+<div class="floating-cart-bar" id="floating-cart-bar">
+  <div class="float-cart-info">
+    <div class="float-cart-count" id="float-cart-count">0 item</div>
+    <div class="float-cart-price" id="float-cart-price">Rp 0</div>
+  </div>
+  <button class="float-cart-btn" onclick="requireLogin('cart')">
+    🛒 Lihat Keranjang
+  </button>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast-msg" id="toast"></div>
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+/* ── Product Data ── */
+const PRODUCTS = [
+  { id:1,  name:'Beras Premium Pandan Wangi', cat:'sembako', price:15000,  unit:'/Kg',    img:'images/sembako.png',       badge:'Populer',  badgeType:'green',   rating:4.8, reviews:42,  sold:234, oldPrice:18000  },
+  { id:2,  name:'Tomat Segar Pilihan',        cat:'sayur',   price:8000,   unit:'/Kg',    img:'images/fresh_produce.png', badge:null,       badgeType:'',        rating:4.7, reviews:31,  sold:189, oldPrice:null   },
+  { id:3,  name:'Bayam Organik Segar',        cat:'sayur',   price:5000,   unit:'/Ikat',  img:'images/fresh_produce.png', badge:'-20%',     badgeType:'',        rating:4.6, reviews:28,  sold:156, oldPrice:6500   },
+  { id:4,  name:'Telur Ayam Kampung',         cat:'daging',  price:32000,  unit:'/12pcs', img:'images/sembako.png',       badge:'Terlaris', badgeType:'green',   rating:4.9, reviews:67,  sold:312, oldPrice:null   },
+  { id:5,  name:'Mangga Harum Manis',         cat:'buah',    price:18000,  unit:'/Kg',    img:'images/fresh_produce.png', badge:null,       badgeType:'',        rating:4.7, reviews:19,  sold:98,  oldPrice:22000  },
+  { id:6,  name:'Minyak Goreng Bimoli 2L',   cat:'sembako', price:38000,  unit:'/Btl',   img:'images/sembako.png',       badge:null,       badgeType:'',        rating:4.8, reviews:45,  sold:201, oldPrice:42000  },
+  { id:7,  name:'Wortel Lokal Segar',         cat:'sayur',   price:7500,   unit:'/Kg',    img:'images/fresh_produce.png', badge:null,       badgeType:'',        rating:4.5, reviews:22,  sold:134, oldPrice:null   },
+  { id:8,  name:'Daging Sapi Has Dalam',      cat:'daging',  price:140000, unit:'/Kg',    img:'images/sembako.png',       badge:'Premium',  badgeType:'yellow',  rating:4.9, reviews:35,  sold:78,  oldPrice:null   },
+  { id:9,  name:'Apel Malang Merah',          cat:'buah',    price:22000,  unit:'/Kg',    img:'images/fresh_produce.png', badge:null,       badgeType:'',        rating:4.6, reviews:24,  sold:115, oldPrice:null   },
+  { id:10, name:'Bawang Merah Brebes',        cat:'bumbu',   price:28000,  unit:'/Kg',    img:'images/sembako.png',       badge:null,       badgeType:'',        rating:4.7, reviews:38,  sold:176, oldPrice:null   },
+  { id:11, name:'Cabai Merah Keriting',       cat:'bumbu',   price:32000,  unit:'/Kg',    img:'images/sembako.png',       badge:'Populer',  badgeType:'green',   rating:4.6, reviews:29,  sold:145, oldPrice:null   },
+  { id:12, name:'Pisang Cavendish',           cat:'buah',    price:15000,  unit:'/Sisir', img:'images/fresh_produce.png', badge:null,       badgeType:'',        rating:4.7, reviews:21,  sold:167, oldPrice:null   },
+];
+const FLASH_ITEMS = [1,3,5,6,9,11].map(id => PRODUCTS.find(p=>p.id===id));
+
+/* ── Cart State ── */
+let cart = JSON.parse(localStorage.getItem('mlj_cart')||'[]');
+const user = () => JSON.parse(localStorage.getItem('mlj_user')||'null');
+
+function fmt(n) { return 'Rp '+Number(n).toLocaleString('id-ID'); }
+function stars(r) { const f=Math.round(r); return '★'.repeat(f)+'☆'.repeat(5-f); }
+
+/* ── Card Builder ── */
+function buildCard(p, scroll=false) {
+  const disc = p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : 0;
+  return `<div class="product-card${scroll?'':' grid'}" onclick="">
+    <div class="p-img-wrap">
+      <img src="${p.img}" alt="${p.name}" loading="lazy">
+      ${p.badge ? `<span class="p-badge ${p.badgeType||''}">${p.badge}</span>` : ''}
+      ${disc ? `<span class="p-disc">-${disc}%</span>` : ''}
+      <div class="p-fav" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</div>
+    </div>
+    <div class="p-body">
+      <div class="p-rating"><span class="p-stars">${stars(p.rating)}</span> ${p.rating} (${p.reviews})</div>
+      <div class="p-name">${p.name}</div>
+      <div class="p-unit">${p.unit}</div>
+      <div class="p-price">${fmt(p.price)}</div>
+      ${p.oldPrice ? `<div class="p-old">${fmt(p.oldPrice)}</div>` : '<div style="height:14px"></div>'}
+      <button class="p-add-btn" onclick="event.stopPropagation();handleAddToCart(${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Keranjang
+      </button>
+    </div>
+  </div>`;
+}
+
+/* ── Render Sections ── */
+function renderFlash() {
+  document.getElementById('flash-row').innerHTML = FLASH_ITEMS.map(p=>buildCard(p,true)).join('');
+}
+function renderPopular() {
+  const sorted = [...PRODUCTS].sort((a,b)=>b.sold-a.sold).slice(0,10);
+  document.getElementById('popular-grid').innerHTML = sorted.map(p=>buildCard(p)).join('');
+}
+function renderSpecial() {
+  const items = PRODUCTS.filter(p=>p.oldPrice).slice(0,6);
+  document.getElementById('special-row').innerHTML = items.map(p=>buildCard(p,true)).join('');
+}
+
+/* ── Category Filter ── */
+function setActiveCat(cat, el) {
+  document.querySelectorAll('.cat-nav-item').forEach(b=>b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else {
+    const navItem = document.querySelector(`.cat-nav-item[data-cat="${cat}"]`);
+    if(navItem) navItem.classList.add('active');
+  }
+  const grid = document.getElementById('popular-grid');
+  const items = cat==='all' ? [...PRODUCTS] : PRODUCTS.filter(p=>p.cat===cat);
+  grid.innerHTML = items.map(p=>buildCard(p)).join('');
+  document.getElementById('popular').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── Auth Gate ── */
+function requireLogin(target='cart') {
+  if (user()) {
+    if (target==='cart'||target==='orders'||target==='profile') {
+      window.location.href = 'dashboard.html' + (target!=='cart'?'#'+target:'');
+    } else {
+      window.location.href = 'dashboard.html';
+    }
+  } else {
+    window.location.href = `auth.html?redirect=${target}`;
+  }
+}
+
+/* ── Add to Cart ── */
+function handleAddToCart(id, name, price) {
+  if (!user()) {
+    showToast('⚠️ Login dulu untuk menambah ke keranjang');
+    setTimeout(() => { window.location.href = `auth.html?redirect=cart`; }, 1200);
+    return;
+  }
+  const existing = cart.find(i=>i.id===id);
+  if (existing) existing.qty++;
+  else cart.push({id, name, price, qty:1, img:'images/sembako.png'});
+  localStorage.setItem('mlj_cart', JSON.stringify(cart));
+  updateCartUI();
+  showToast(`✅ ${name} ditambahkan ke keranjang!`, 'green');
+}
+
+/* ── Cart UI Update ── */
+function updateCartUI() {
+  const total = cart.reduce((s,i)=>s+i.qty, 0);
+  const totalPrice = cart.reduce((s,i)=>s+i.qty*i.price, 0);
+  const badge = document.getElementById('header-cart-count');
+  badge.textContent = total;
+  badge.style.display = total>0?'flex':'none';
+  const bar = document.getElementById('floating-cart-bar');
+  if(total>0) {
+    bar.classList.add('show');
+    document.getElementById('float-cart-count').textContent = total+' item';
+    document.getElementById('float-cart-price').textContent = fmt(totalPrice);
+  } else {
+    bar.classList.remove('show');
+  }
+}
+
+/* ── Header User State ── */
+function updateHeaderUser() {
+  const u = user();
+  const lbl = document.getElementById('hdr-login-label');
+  const btn = document.getElementById('hdr-login-btn');
+  if(u) {
+    lbl.textContent = u.name.split(' ')[0];
+    btn.onclick = () => window.location.href = 'dashboard.html';
+  }
+}
+
+/* ── Toast ── */
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = type==='green' ? '#1E9E4E' : '#1F2937';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+/* ── Search ── */
+function doSearch() {
+  const q = document.getElementById('main-search').value.trim();
+  if(!q) return;
+  const results = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q.toLowerCase()));
+  document.getElementById('popular-grid').innerHTML = results.length
+    ? results.map(p=>buildCard(p)).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray-400)">🔍 Produk tidak ditemukan</div>';
+  document.getElementById('popular').scrollIntoView({behavior:'smooth'});
+}
+
+/* ── Section Scroll ── */
+function goToSection(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+/* ── Hero Carousel ── */
+let curSlide=0, slideInt;
+function goToSlide(n, ev) {
+  if(ev) ev.stopPropagation();
+  document.querySelectorAll('.hero-slide').forEach((s,i)=>s.classList.toggle('active',i===n));
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+  curSlide=n; clearInterval(slideInt); slideInt=setInterval(nextSlide,4500);
+}
+function nextSlide(){ goToSlide((curSlide+1)%3); }
+
+/* ── Countdown ── */
+function startTimer() {
+  let s=8*3600+34*60+59;
+  const h=document.getElementById('timer-h'), m=document.getElementById('timer-m'), sec=document.getElementById('timer-s');
+  setInterval(()=>{
+    if(s<=0){s=12*3600;return;} s--;
+    if(h) h.textContent=String(Math.floor(s/3600)).padStart(2,'0');
+    if(m) m.textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
+    if(sec) sec.textContent=String(s%60).padStart(2,'0');
+  },1000);
+}
+
+/* ── Sticky Header Shadow ── */
+window.addEventListener('scroll',()=>{
+  document.getElementById('site-header')?.classList.toggle('scrolled',window.scrollY>10);
+});
+
+/* ── Desktop Hero Layout ── */
+function initHeroLayout() {
+  const wrap = document.getElementById('hero-layout');
+  const w = window.innerWidth;
+  if (w >= 1440) {
+    wrap.style.display='grid';
+    wrap.style.gridTemplateColumns='1fr 300px';
+    wrap.style.gap='16px';
+    wrap.style.padding='0 60px';
+    wrap.style.marginBottom='0';
+  } else if (w >= 1280) {
+    wrap.style.display='grid';
+    wrap.style.gridTemplateColumns='1fr 280px';
+    wrap.style.gap='16px';
+    wrap.style.padding='0 40px';
+    wrap.style.marginBottom='0';
+  } else if (w >= 900) {
+    wrap.style.display='grid';
+    wrap.style.gridTemplateColumns='1fr 240px';
+    wrap.style.gap='12px';
+    wrap.style.padding='0 24px';
+    wrap.style.marginBottom='0';
+  } else {
+    wrap.style.display='contents';
+    wrap.style.padding='';
+  }
+}
+window.addEventListener('resize', initHeroLayout);
+
+/* ── Search Enter ── */
+document.getElementById('main-search').addEventListener('keypress',e=>{ if(e.key==='Enter') doSearch(); });
+
+/* ── Init ── */
+renderFlash();
+renderPopular();
+renderSpecial();
+updateCartUI();
+updateHeaderUser();
+initHeroLayout();
+slideInt = setInterval(nextSlide, 4500);
+startTimer();
+</script>
+</body>
+</html>
